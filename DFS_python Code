@@ -1,0 +1,66 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Mar 29 11:35:40 2019
+
+@author: DaffodilPC
+"""
+
+graph={'Oradea':['Zerind','Siblu'],
+    'Zerind':['Arad','Oradea'],
+    'Arad':['Siblu','Timisoara','Zerind'],
+    'Timisoara':['Lugoj','Arad'],
+   'Lugoj':['Mehedia','Timisoara'],
+   'Mehedia':['Lugoj','Dobreta'],
+   'Dobreta':['Mehedia','Cralova'],
+   'Cralova':['Dobreta','Pitesti','Rimnicu Vilcea'],
+    'Pitesti':['Bucharest','Rimnicu Vilcea','Cralova'],
+   'Bucharest':['Pitesti','Glurglu','Pagaras','Urziceni'],
+   'Pagaras':['Siblu','Bucharest'],
+   'Siblu':['Pagaras','Rimnicu Vilcea','Arad','Oradea'],
+   'Rimnicu Vilcea':['Pitesti','Siblu','Cralova'],
+   'Urziceni':['Bucharest','Vaslul','Hirsova'],
+    'Neamt':['Issl'],
+   'Issl':['Neamt','Vaslul'],
+   'Vaslul':['Issl','Urziceni'],
+   'Hirsova':['Urziceni','Etorie'],
+       'Glurglu':['Bucharest'],
+       'Etorie':['Hirsova']
+   }
+
+route=[]
+visited=[]
+
+
+
+def dfs(start,destination):
+     route.append(start)
+     while len(route)>0:
+         vertex=route.pop(len(route)-1)
+         if vertex not in visited:
+             visited.append(vertex)
+             route.extend(set(graph[vertex])-set(visited))
+         if visited.__contains__(destination):
+            break
+     return visited      
+                 
+
+suru = input("Starting Point:  ")
+if suru not in graph:
+    print(suru+"does not exist\n\nStarting Point:  ");
+    suru = input()
+    
+ses = input("\n\nEnding Point:  ")
+if ses not in graph:
+    print(ses+"does not exist\n\nEnding Point Point:  ");
+    ses = input()
+
+"""//'Arad','Pagaras'//"""
+
+v = dfs(suru,ses)
+
+print("The Shortest Path from "+suru+" To "+ses+":  ")
+
+j=0
+for i in v:
+    print(v[j])
+    j+=1
